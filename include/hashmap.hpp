@@ -13,7 +13,7 @@ private:
   unsigned int elements = 0;
   //the ratio of elements to memory
   float load_factor;
-  //a function that returns whether or not the load factor has been achieved
+  //a function that returns whether or not there are enough elements in the hashmap to warrant a resize
   bool need_resize();
   //a function that resizes the hashmap if needed
   void update_mem();
