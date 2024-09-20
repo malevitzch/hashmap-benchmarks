@@ -1,4 +1,5 @@
 #include "hashfunc.hpp"
+#include <cstdint>
 
 unsigned int polynomial_hash(unsigned int base, unsigned int modulo, std::string input)
 {
@@ -14,3 +15,14 @@ unsigned int polynomial_hash(unsigned int base, unsigned int modulo, std::string
   return hash;
 }
 
+unsigned int fnv1a_hash(std::string input, unsigned int modulo)
+{
+  const unsigned int FNV_prime = 0x01000193;
+  unsigned int hash = 0x811C9DC5;
+  for(char ch : input)
+  {
+    hash ^= static_cast<uint8_t>(ch);
+    hash *= FNV_prime;
+  }
+  return hash % modulo;
+}

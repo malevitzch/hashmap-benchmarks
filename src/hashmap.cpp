@@ -10,7 +10,7 @@ void Hashmap::update_mem()
   auto contents = get_all();
 
   //this is debug, ignore
-  std::cout<<"Elements: " << elements << " Resized from " << mem.size() << " to " << mem.size()*2 << "\n";
+  //std::cout<<"Elements: " << elements << " Resized from " << mem.size() << " to " << mem.size()*2 << "\n";
   
   //reset mem, increasing the size twofold
   mem = (typeof(mem))(2*mem.size());
