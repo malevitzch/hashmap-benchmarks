@@ -19,6 +19,7 @@ private:
   void update_mem();
   
 public:
+  int opcalls = 0;
   Hashmap() = delete;
   Hashmap(unsigned int mem_size, float load_factor, typeof(hash_function) hash_function);
   //access operator

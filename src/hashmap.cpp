@@ -14,6 +14,7 @@ void Hashmap::update_mem()
   
   //reset mem, increasing the size twofold
   mem = (typeof(mem))(2*mem.size());
+  elements = 0;
   for(auto&[key, val] : contents)
   {
     //this might look sus but it's just me being lazy and calling the operator rather than doing this manually
@@ -27,6 +28,7 @@ Hashmap::Hashmap(unsigned int initial_mem_size, float load_factor, typeof(hash_f
 
 int& Hashmap::operator[](std::string key)
 {
+  opcalls++;
   unsigned int hash = hash_function(key, mem.size());
   for(auto&[c_key, val] : mem[hash])
   {
@@ -40,6 +42,7 @@ int& Hashmap::operator[](std::string key)
   {
     update_mem();
     //we call the function recursively to get the reference to the object on the new updated map
+    //NOTE: this can be simply changed to not be recursive, 
     return (*this)[key];
   }
   mem[hash].push_back({key, 0});
