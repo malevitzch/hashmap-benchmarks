@@ -32,7 +32,11 @@ int& Hashmap::operator[](std::string key)
 
 bool Hashmap::contains(std::string key)
 {
-  
+  for(auto& vec : mem)
+  {
+    for(auto& el : vec) if(el.first == key) return true;
+  }
+  return false;
 }
 
 std::vector<std::pair<std::string, int> > Hashmap::get_all()
