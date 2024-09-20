@@ -9,7 +9,7 @@ class Hashmap
 private:
   //we store all of our stuff here
   std::vector<std::vector<std::pair<std::string, int>>> mem;
-  std::function<unsigned int(std::string, unsigned int mod)> hash_function;
+  unsigned int fnv1a_hash(std::string input);
   unsigned int elements = 0;
   //the ratio of elements to memory
   float load_factor;
@@ -19,9 +19,8 @@ private:
   void update_mem();
   
 public:
-  int opcalls = 0;
   Hashmap() = delete;
-  Hashmap(unsigned int mem_size, float load_factor, typeof(hash_function) hash_function);
+  Hashmap(unsigned int mem_size, float load_factor);
   //access operator
   int& operator[](std::string key);
   //checks if key is present in map
