@@ -1,5 +1,5 @@
 #include "hashmap.hpp"
-
+#include <iostream>
 bool Hashmap::need_resize()
 {
   return load_factor * mem.size() < elements;
@@ -7,10 +7,11 @@ bool Hashmap::need_resize()
 
 void Hashmap::update_mem()
 {
-  //if there is no need to resize then we do nothing
-  if(!need_resize()) return;
-  //TODO: implement resize logic
   auto contents = get_all();
+
+  //this is debug, ignore
+  std::cout<<"Elements: " << elements << " Resized from " << mem.size() << " to " << mem.size()*2 << "\n";
+  
   //reset mem, increasing the size twofold
   mem = (typeof(mem))(2*mem.size());
   for(auto&[key, val] : contents)
@@ -32,9 +33,16 @@ int& Hashmap::operator[](std::string key)
     if(c_key == key) return val;
   }
   //add a dummy element in case there is no element with that key
-  mem[hash].push_back({key, 0});
   //increment the elements since this is a new element we are adding
   elements++;
+  //in case we have too many elements, we need to reorganize the whole hashmap
+  if(need_resize())
+  {
+    update_mem();
+    //we call the function recursively to get the reference to the object on the new updated map
+    return (*this)[key];
+  }
+  mem[hash].push_back({key, 0});
   //return a reference to the new element so that you can do: map[x] = 10;
   return mem[hash].back().second;
 }
