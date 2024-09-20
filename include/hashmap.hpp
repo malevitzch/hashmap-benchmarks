@@ -1,6 +1,5 @@
 #include <string>
 #include <vector>
-#include <functional>
 
 
 //this is not a generic implementation since we need it for only one usecase, basicaly supposed to be std::unordered_map<std::string, int>
